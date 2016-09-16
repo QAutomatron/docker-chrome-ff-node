@@ -1,0 +1,26 @@
+{
+  "capabilities":
+      [
+        {
+          "browserName": "firefox",
+          "version": "45",
+          "platform": "LINUX",
+          "maxInstances": 1,
+          "seleniumProtocol": "WebDriver" 
+        },
+        {
+          "browserName": "chrome",
+          "version": "50",
+          "platform": "LINUX",
+          "maxInstances": 1,
+          "seleniumProtocol": "WebDriver"
+        }
+      ],
+  "configuration": {
+    "proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy",
+    "maxSession": 1,
+    "port": 5550,
+    "register": true,
+    "registerCycle": 1000
+  }
+}
