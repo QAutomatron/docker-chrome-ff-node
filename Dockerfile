@@ -1,4 +1,4 @@
-FROM selenium/node-base:2.53.0
+FROM selenium/node-base:latest
 MAINTAINER QAutomatron
 
 USER root
@@ -35,7 +35,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
 #==================
 # Chrome webdriver
 #==================
-ENV CHROME_DRIVER_VERSION 2.22
+ENV CHROME_DRIVER_VERSION 2.24
 RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.storage.googleapis.com/$CHROME_DRIVER_VERSION/chromedriver_linux64.zip \
   && rm -rf /opt/selenium/chromedriver \
   && unzip /tmp/chromedriver_linux64.zip -d /opt/selenium \
@@ -47,7 +47,7 @@ RUN wget --no-verbose -O /tmp/chromedriver_linux64.zip https://chromedriver.stor
 #=========
 # Firefox
 #=========
-ENV FIREFOX_VERSION 45.0.2
+ENV FIREFOX_VERSION 47.0.1
 RUN apt-get update -qqy \
   && apt-get -qqy --no-install-recommends install firefox \
   && rm -rf /var/lib/apt/lists/* \
@@ -78,20 +78,7 @@ COPY \
 RUN chmod +x /opt/bin/clear_x_locks.sh
 RUN chmod +x /opt/bin/entry_point.sh
 
-RUN apt-get update -qqy && apt-get -qqy install libnss3-tools
-
-#Copy cert
-COPY devroot.cer /home/seluser/devroot.cer
-
 USER seluser
-
-### Add cert
-RUN sudo chmod +xr $HOME/devroot.cer
-RUN sudo mkdir -p $HOME/.pki/nssdb
-RUN sudo chmod 777 ~/.pki/nssdb
-RUN certutil -d sql:$HOME/.pki/nssdb -N
-RUN certutil -d sql:$HOME/.pki/nssdb -A -t TC -n "devcer" -i $HOME/devroot.cer
-###
 
 # Following line fixes
 # https://github.com/SeleniumHQ/docker-selenium/issues/87
