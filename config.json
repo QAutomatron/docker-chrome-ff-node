@@ -3,14 +3,14 @@
       [
         {
           "browserName": "firefox",
-          "version": "47",
+          "version": "50",
           "platform": "LINUX",
           "maxInstances": 1,
           "seleniumProtocol": "WebDriver"
         },
         {
           "browserName": "chrome",
-          "version": "53",
+          "version": "56",
           "platform": "LINUX",
           "maxInstances": 1,
           "seleniumProtocol": "WebDriver"
